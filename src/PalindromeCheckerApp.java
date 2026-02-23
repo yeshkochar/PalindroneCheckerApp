@@ -1,28 +1,21 @@
-public class PalindromeCheckerApp {
+public class PalindromeCheckUC4_Version2 {
 
     public static void main(String[] args) {
 
-        String original = "madam";
+        String original = "racecar";
 
-        // Convert String to char[]
-        char[] characters = original.toCharArray();
-
-        // Two-pointer approach
-        int start = 0;
-        int end = characters.length - 1;
+        // Convert String to char array
+        char[] chars = original.toCharArray();
 
         boolean isPalindrome = true;
 
-        while (start < end) {
+        // Two-pointer using for loop
+        for (int i = 0; i < chars.length / 2; i++) {
 
-            // Compare start & end characters
-            if (characters[start] != characters[end]) {
+            if (chars[i] != chars[chars.length - 1 - i]) {
                 isPalindrome = false;
                 break;
             }
-
-            start++;
-            end--;
         }
 
         if (isPalindrome) {
