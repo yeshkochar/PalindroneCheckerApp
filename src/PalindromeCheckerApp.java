@@ -1,23 +1,30 @@
-public class PalindromeCheckUC4_Version2 {
+import java.util.Stack;
+
+public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        String original = "racecar";
+        String original = "level";
+        Stack<Character> stack = new Stack<>();
 
-        // Convert String to char array
-        char[] chars = original.toCharArray();
+        // Push characters into stack
+        for (int i = 0; i < original.length(); i++) {
+            stack.push(original.charAt(i));
+        }
 
         boolean isPalindrome = true;
 
-        // Two-pointer using for loop
-        for (int i = 0; i < chars.length / 2; i++) {
+        // Pop and compare
+        for (int i = 0; i < original.length(); i++) {
+            char poppedChar = stack.pop();  // LIFO order
 
-            if (chars[i] != chars[chars.length - 1 - i]) {
+            if (original.charAt(i) != poppedChar) {
                 isPalindrome = false;
                 break;
             }
         }
 
+        // Print result
         if (isPalindrome) {
             System.out.println(original + " is a Palindrome.");
         } else {
