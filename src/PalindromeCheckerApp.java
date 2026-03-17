@@ -51,42 +51,48 @@ class DequeStrategy implements PalindromeStrategy {
     }
 }
 
-// Context class
-class PalindromeService {
+// Performance comparison class
+class PerformanceTest {
 
-    private PalindromeStrategy strategy;
+    static void test(PalindromeStrategy strategy,
+                     String name,
+                     String input) {
 
-    public PalindromeService(PalindromeStrategy strategy) {
-        this.strategy = strategy;
-    }
+        long start = System.nanoTime();
 
-    public boolean checkPalindrome(String input) {
-        return strategy.check(input);
+        boolean result = strategy.check(input);
+
+        long end = System.nanoTime();
+
+        long time = end - start;
+
+        System.out.println(
+                name + " -> " + result +
+                        " | Time: " + time + " ns");
     }
 }
 
 // Main class
-public class UC12 {
+public class UC13 {
 
     public static void main(String[] args) {
 
         String str = "Madam In Eden Im Adam";
 
-        // choose strategy at runtime
+        PalindromeStrategy stack =
+                new StackStrategy();
 
-        PalindromeStrategy strategy;
+        PalindromeStrategy deque =
+                new DequeStrategy();
 
-        // change here to test
-        strategy = new StackStrategy();
-        // strategy = new DequeStrategy();
+        PerformanceTest.test(
+                stack,
+                "Stack Strategy",
+                str);
 
-        PalindromeService service =
-                new PalindromeService(strategy);
-
-        if (service.checkPalindrome(str)) {
-            System.out.println("Palindrome");
-        } else {
-            System.out.println("Not Palindrome");
-        }
+        PerformanceTest.test(
+                deque,
+                "Deque Strategy",
+                str);
     }
 }
